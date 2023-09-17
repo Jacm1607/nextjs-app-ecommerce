@@ -81,18 +81,18 @@ const FormShop = () => {
       }
     );
 
-    if (response.status == 200) {
-      try {
+    if (response.ok) {
+      /* try {
         removeProductAllStore();
         const responseEmail = await fetch(
           "https://www.email.hauscenter.com.bo/api/send-email"
         );
-        if (responseEmail.status == 200) {
+        if (responseEmail.status == 200) { */
           router.push("/compra-realizada");
-        }
+       /*  }
       } catch (error) {
         alert("Ocurrió un error inesperado! Vuelve a intentarlo en un momento.");
-      }
+      } */
     }
   };
 
