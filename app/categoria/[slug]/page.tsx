@@ -1,8 +1,10 @@
+import ListSubcategory from "@/components/page/listSubcategory"
+
 export default function Category({ params }: any) {
     const { slug } = params
     return (
         <>
-            {slug}
+             <ListSubcategory slug={slug} />
         </>
     )
 }
