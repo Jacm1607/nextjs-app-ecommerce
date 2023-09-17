@@ -1,8 +1,28 @@
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import Img from '@/components/ui/img'
 import Image from 'next/image'
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <div className="relative w-full h-[430px] bg-gradient-to-t from-[#0F2027] via-[#203A43] to-[#2C5364] rounded-2xl">
+        <div className="absolute p-8 flex flex-col h-full">
+          <div className="">
+            <Badge className='text-xl'>-30% de Descuento</Badge>
+            <p className=' text-[40px] text-white font-semibold h-[40px]'>Audifonos</p>
+            <p className='text-[68px] text-white font-extrabold'>Oferta Exclusiva</p>
+            <p className='text-white'>¡Escucha la música como nunca antes! Obtén un 20% de descuento en audífonos de alta calidad. ¡Sumérgete en un sonido cristalino y envolvente hoy mismo!</p>
+          </div>
+          <div className="mt-auto">
+
+            <Button variant={'secondary'}>Acceder a oferta</Button>
+          </div>
+        </div>
+        <div className="absolute flex justify-end w-full h-full">
+          <Img baseUrl={false} url={'/products/1LGAUP4TB0000009.jpg'} width={'auto'} height={'100%'} objectFit={'contain'} />
+        </div>
+      </div>
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
