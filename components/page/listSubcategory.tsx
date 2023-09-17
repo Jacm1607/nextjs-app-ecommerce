@@ -56,6 +56,7 @@ interface ICategoria {
 
 
 const ListSubcategory = ({ slug: slug }: ICategoria) => {
+    const [subcategory, setSubcategory] = useState<any>();
     const [category, setCategory] = useState<any>();
     const [products, setProducts] = useState([])
     const [loadingSubcategory, setLoadingSubcategory] = useState(true)
@@ -91,7 +92,7 @@ const ListSubcategory = ({ slug: slug }: ICategoria) => {
             cache: 'no-store'
         })
         const jsonResponse = await respose.json();
-        setCategory(subcategoria)
+        setSubcategory(subcategoria)
         setProducts(jsonResponse);
         setLoadingProduct(false);
     }
@@ -105,11 +106,8 @@ const ListSubcategory = ({ slug: slug }: ICategoria) => {
             const jsonResponse = await respose.json();
             console.log(jsonResponse.data[0]);
             setCategory(jsonResponse.data[0])
+            fetchProduct(jsonResponse.data[0].attributes.subcategorias.data[0].id)
             setLoadingSubcategory(false);
-           /*  setSubcategories(jsonResponse);
-            fetchProduct(jsonResponse.data.attributes.subcategorias.data[0].id)
-            
-             */
         }
         fetchSubcategories()
     }, [])
@@ -146,7 +144,7 @@ const ListSubcategory = ({ slug: slug }: ICategoria) => {
                                 </ScrollArea>
                             </div>
                         </div>
-                        {/* <ListProducts onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMin={priceMin} priceMax={priceMax} newFetchProducts={newFetchProducts} loadingProduct={loadingProduct} products={products} onChangeOrderByPrice={onChangeOrderByPrice} /> */}
+                        <ListProducts onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMin={priceMin} priceMax={priceMax} newFetchProducts={newFetchProducts} loadingProduct={loadingProduct} products={products} onChangeOrderByPrice={onChangeOrderByPrice} />
                     </>
                     : <div className="h-[700px] flex justify-center items-center">
                         <span>Cargando...</span>
@@ -228,7 +226,7 @@ const ListProducts = ({ loadingProduct, products, onChangeOrderByPrice, newFetch
                                         {
                                             !loadingProduct ?
                                                 products.data.length > 0 ? products.data.map((product: any) => (
-                                                    <Link key={product.id} href={`/producto/${product.id}`}>
+                                                    <Link key={product.id} href={`/`}>
                                                     <div className=" cursor-pointer flex border-2 border-sky-800 border-opacity-40 rounded-3xl">
                                                         <div className="img p-4">
                                                             <Img url={product.attributes.imagen.data[0].attributes.url} width={"140px"} height={"140px"} objectFit={"contain"} />
