@@ -23,10 +23,10 @@ const DetailsProduct = async ({ slug }: any) => {
                         <CardDescription>{_product.data[0].attributes.modelo.data !== null ? _product.data[0].attributes.modelo.data.attributes.nombre : 'SIN MODELO'}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="lg:col-span-2 col-span-3 flex justify-center items-center">
+                        <div className="flex justify-center items-center">
                             <Img url={_product.data[0].attributes.imagen.data[0].attributes.url} width={'350px'} height={'350px'} objectFit={"contain"} />
                         </div>
-                        <div className="lg:col-span-1 col-span-3 lg:block space-y-2 mt-10 flex flex-wrap justify-center gap-4">
+                        <div className="space-y-2 mt-10 flex justify-center gap-4">
                             {_product.data[0].attributes.imagen.data.map((element: any) => <div key={element.id} className="rounded-3xl border-2 border-solid border-sky-900 w-[150px] h-[150px] flex justify-center items-center">
                                 <Img url={element.attributes.url} width={"100px"} height={"100px"} objectFit={"contain"} />
                             </div>)
