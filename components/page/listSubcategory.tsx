@@ -103,7 +103,6 @@ const ListSubcategory = ({ slug: slug }: ICategoria) => {
                 cache: 'no-store'
             })
             const jsonResponse = await respose.json();
-            console.log(jsonResponse.data[0]);
             setCategory(jsonResponse.data[0])
             fetchProduct(jsonResponse.data[0].attributes.subcategorias.data[0].id)
             setLoadingSubcategory(false);
