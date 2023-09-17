@@ -1,3 +1,4 @@
+import BranHome from '@/components/page/brandHome'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import CategoryHome from '@/components/ui/categoryHome'
@@ -25,6 +26,7 @@ export default function Home() {
       </div>
       <TitleBorder title={'Categorias'} />
       <CategoryHome />
+      <BranHome />
     </main>
   )
 }
