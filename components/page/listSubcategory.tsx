@@ -78,7 +78,7 @@ const ListSubcategory = ({ slug: slug }: ICategoria) => {
     }
     const filterFetchProducts = async () => {
         setLoadingProduct(true);
-        const respose = await fetch(`${URL_BASE}/api/productos?populate[subcategoria]=*&filters[subcategoria][id][$eq]=${category.id}&pagination[page]=1&populate[imagen][fields][0]=url&sort[0]=precio:${orderByPrice}&filters[precio][$gte]=${priceMin}&filters[precio][$lte]=${priceMax}`, {
+        const respose = await fetch(`${URL_BASE}/api/productos?populate[subcategoria]=*&filters[subcategoria][id][$eq]=${subcategory}&pagination[page]=1&populate[imagen][fields][0]=url&sort[0]=precio:${orderByPrice}&filters[precio][$gte]=${priceMin}&filters[precio][$lte]=${priceMax}`, {
             cache: 'no-store'
         })
         const jsonResponse = await respose.json();
