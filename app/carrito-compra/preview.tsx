@@ -7,6 +7,7 @@ import { Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { URL_BASE } from "@/lib/endpoint";
 import TitleBorder from "@/components/ui/titleBorder";
+import Link from "next/link";
 
 const PreviewShop = () => {
     const [products, setProducts] = useState([]);
@@ -76,9 +77,9 @@ const PreviewShop = () => {
                                     <p className="text-right font-extrabold text-2xl"> Bs.<span>{total}</span></p>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button className="w-full">
+                                    <Link href={'/caja'} className="w-full"><Button className="w-full">
                                         Ir a caja
-                                    </Button>
+                                    </Button></Link>
                                 </CardFooter>
                             </Card>
                         </div>
