@@ -55,7 +55,7 @@ export function ItemsNavbar() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Categorias</NavigationMenuTrigger>
+          <NavigationMenuTrigger type="button">Categorias</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[700px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
