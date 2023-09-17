@@ -76,10 +76,9 @@ const ListSubcategory = ({ slug: slug }: ICategoria) => {
     const onChangePriceMin = (price: any) => {
         setPriceMin(price)
     }
-    const newFetchProducts = async () => {
-        console.log('click')
+    const filterFetchProducts = async () => {
         setLoadingProduct(true);
-        const respose = await fetch(`${URL_BASE}/api/productos?populate[subcategoria]=*&filters[subcategoria][id][$eq]=${category}&pagination[page]=1&populate[imagen][fields][0]=url&sort[0]=precio:${orderByPrice}&filters[precio][$gte]=${priceMin}&filters[precio][$lte]=${priceMax}`, {
+        const respose = await fetch(`${URL_BASE}/api/productos?populate[subcategoria]=*&filters[subcategoria][id][$eq]=${category.id}&pagination[page]=1&populate[imagen][fields][0]=url&sort[0]=precio:${orderByPrice}&filters[precio][$gte]=${priceMin}&filters[precio][$lte]=${priceMax}`, {
             cache: 'no-store'
         })
         const jsonResponse = await respose.json();
@@ -144,7 +143,7 @@ const ListSubcategory = ({ slug: slug }: ICategoria) => {
                                 </ScrollArea>
                             </div>
                         </div>
-                        <ListProducts onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMin={priceMin} priceMax={priceMax} newFetchProducts={newFetchProducts} loadingProduct={loadingProduct} products={products} onChangeOrderByPrice={onChangeOrderByPrice} />
+                        <ListProducts onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMin={priceMin} priceMax={priceMax} newFetchProducts={filterFetchProducts} loadingProduct={loadingProduct} products={products} onChangeOrderByPrice={onChangeOrderByPrice} />
                     </>
                     : <div className="h-[700px] flex justify-center items-center">
                         <span>Cargando...</span>
