@@ -5,14 +5,15 @@ import StockProduct from "./stockProduct";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 const fetchProduct = (slug: any) => {
-    return fetch(`${URL_BASE}/api/productos?filters[slug][$eq]=${slug}&populate=*`)
+    return fetch(`${URL_BASE}/api/productos?filters[slug][$eq]=${slug}&populate=*`, {
+        cache: 'no-store'
+    })
         .then(res => res.json())
 }
 
 
 const DetailsProduct = async ({ slug }: any) => {
     const _product = await fetchProduct(slug);
-
     return (
         <div className="grid grid-cols-6 gap-6 px-24 py-8">
             <div className="col-span-4">
