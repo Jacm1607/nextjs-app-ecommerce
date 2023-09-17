@@ -6,7 +6,7 @@ import { ItemsNavbar } from './itemsNavbar';
 
 const Navbar = () => {
     return (
-        <form action="" className="w-full h-full flex items-center" method="get" autoComplete='off' >
+        <form action="/buscador" className="w-full h-full flex items-center" method="get" autoComplete='off' >
             <div className="h-[70px] bg-primary w-full sticky top-0 grid grid-cols-6 gap-5 z-10">
                 <div className="col-span-1 flex items-center ml-2">
                     <Link href={'/'}><Image src={'/logo-blanco-horizontal.png'} alt='Hauscenter' width={240} height={130} style={{ width: '70%', height: '70%' }}></Image></Link>
