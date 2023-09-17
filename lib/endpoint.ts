@@ -1,0 +1,1 @@
+export const URL_BASE = 'https://www.dashboard.hauscenter.com.bo'
