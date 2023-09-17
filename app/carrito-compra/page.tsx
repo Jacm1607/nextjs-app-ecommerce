@@ -1,7 +1,5 @@
 import PreviewShop from "./preview"
 
-
-
 export default async function DemoPage() {
 
   return (
