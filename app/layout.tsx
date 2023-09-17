@@ -1,3 +1,4 @@
+import Navbar from '@/components/ui/navbar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -15,7 +16,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="es-BO">
+      <Navbar/>
       <body className={inter.className}>{children}</body>
     </html>
   )
