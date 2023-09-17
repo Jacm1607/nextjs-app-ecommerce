@@ -84,7 +84,9 @@ const PreviewShop = () => {
                         </div>
                     </div></>
             ) : (
-                <div>CARRITO VACIO</div>
+                <div className="min-h-screen text-2xl pt-16">
+                    <span className=" font-extrabold">Tu carrito de compras está vacío</span> por el momento. Explora nuestra selección de productos y encuentra tus favoritos. ¡Estamos aquí para ayudarte a encontrar lo que necesitas!
+                </div>
             )}
         </>
     );
