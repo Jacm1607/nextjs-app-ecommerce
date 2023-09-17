@@ -3,6 +3,7 @@ import { Button } from './button';
 import { Input } from './input';
 import Link from 'next/link';
 import { ItemsNavbar } from './itemsNavbar';
+import { ShoppingCart } from 'lucide-react';
 
 const Navbar = () => {
     return (
@@ -19,7 +20,7 @@ const Navbar = () => {
                     <Button className='rounded-l-none' variant={'secondary'} type="submit">Buscar</Button>
                 </div>
                 <div className="col-span-2 flex justify-end items-center text-white space-x-2">
-                    <Link href={'/carrito-compra'} className='px-4 py-2'>Carrito</Link>
+                    <Link href={'/carrito-compra'} className='px-4 py-2 text-center w-[120px] flex items-center'> <ShoppingCart size={20} color="#fff" /> <span className='ml-2'>Carrito</span></Link>
                     {/* <Link href={'/'} className='px-4 py-2 bg-black'>Favorito</Link> */}
                     {/* <Link href={'/'} className='px-4 py-2 bg-black'>Mi Cuenta</Link> */}
                 </div>
