@@ -1,10 +1,9 @@
 'use client'
 import { useEffect, useState } from "react";
 import { getProductStore, removeProductStore } from "@/lib/store";
-import Img from "@/components/ui/img";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trash, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { URL_BASE } from "@/lib/endpoint";
 import TitleBorder from "@/components/ui/titleBorder";
