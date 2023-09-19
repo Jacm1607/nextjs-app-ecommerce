@@ -78,7 +78,7 @@ export default function Address() {
             <div className="grid grid-cols-3 gap-6">
                 {
                     branches.map((branch: any) => (
-                        <div className="col-spa-1">
+                        <div key={branch.name} className="col-spa-1">
                             <Card>
                                 <CardHeader>
                                     <CardTitle>{branch.name}</CardTitle>

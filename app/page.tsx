@@ -10,6 +10,15 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
+    <>
+      <div className='w-full flex justify-center'>
+        <p className='text-primary font-bold text-4xl my-4'>CRÉDITOS APROBADOS EN 24 HORAS</p>
+      </div>
+      <div className="grid grid-cols-3 gap-3 text-center py-4 bg-gray-300 text-2xl font-bold text-primary">
+        <div className="col-span-1"><Link href={'/credi-haus'}>CREDI HAUS</Link></div>
+        <div className="col-span-1 border-l-2 border-r-2 border-primary"><Link href={'/'}>SEGUIMIENTO DE PEDIDO</Link></div>
+        <div className="col-span-1"><Link href={'/sucursales'}>SUCURSALES</Link></div>
+      </div>
     <main className="flex min-h-screen flex-col p-24">
       <div className="relative w-full h-[430px] bg-gradient-to-t from-[#0F2027] via-[#203A43] to-[#2C5364] rounded-2xl">
         <div className="absolute p-8 flex flex-col h-full">
@@ -53,5 +62,6 @@ export default function Home() {
         </div>
       </div>
     </main>
+    </>
   )
 }

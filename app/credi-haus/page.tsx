@@ -44,7 +44,7 @@ export default function CreditInfo() {
             <div className="grid grid-cols-2 gap-6">
                 {
                     creditInfo.map((creditInfoItem: any) => (
-                        <div className="col-spa-1">
+                        <div key={creditInfoItem.name} className="col-spa-1">
                             <Card>
                                 <CardHeader>
                                     <CardTitle className="text-center">{creditInfoItem.name}</CardTitle>
