@@ -1,6 +1,7 @@
 import { URL_BASE } from "@/lib/endpoint";
 import Img from "../ui/img";
 import TitleSection from "../ui/titleSection";
+import TitleBorder from "../ui/titleBorder";
 
 
 export interface IPaginaPrincipal {
@@ -50,8 +51,8 @@ const fetchImgPaginaPrincipal = () => {
 const AdsHome = async () => {
     const images: IPaginaPrincipal = await fetchImgPaginaPrincipal()
     return (
-        <div className="my-20">
-            <TitleSection title={"Descubre las"} subtitle={"novedades haus"} />
+        <div className="my-10">
+            <TitleBorder title="Novedades Haus" />
             <div className="flex justify-center">
                 <div className="grid grid-rows-4 grid-cols-5 gap-4 w-10/12">
                     <div className="md:row-span-4 row-span-2 md:col-span-3 col-span-5">
