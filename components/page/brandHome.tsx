@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Img from "../ui/img";
+import TitleBorder from "../ui/titleBorder";
 
 const BranHome = () => {
     return (
         <div className="grid grid-cols-5 my-6">
-            <div className="col-span-1 bg-primary rounded-r-3xl pl-4 text-white font-bold text-5xl flex items-center justify-center">
-                <p className="text-center uppercase">MARCAS</p>
+            <div className="col-span-5">
+                <TitleBorder title={"mARCAS RECONOCIDAS"} />
             </div>
             <div className="col-span-4">
                 <div className="flex w-full overflow-x-auto space-x-8 py-8 pl-10">
