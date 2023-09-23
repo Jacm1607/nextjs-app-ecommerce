@@ -36,7 +36,7 @@ const StockProduct = ({ product }: any) => {
                 </> : available ? <>
                     Producto no disponible por el momento
                 </> : <>
-                    <select onClick={(e:any) => {setQ(e.target.value)}} className="rounded-full border-2 border-solid border-sky-900 w-20 text-3xl text-center text-sky-900 font-bold" name="" id="">
+                    <select onClick={(e:any) => {setQ(e.target.value)}} className="rounded-full border-2 border-solid border-primary w-20 text-3xl text-center text-primary font-bold" name="" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -47,7 +47,8 @@ const StockProduct = ({ product }: any) => {
                             description: "Haz agregado al carrito de compra un producto.",
                         })
                         addProductStore(product, q)
-                    }} className="rounded-full border-2 border-solid border-sky-900 text-3xl text-center text-white font-bold bg-sky-900 px-5">Añadir</button>
+                    }} className="rounded-full border-2 border-solid border-primary text-3xl text-center text-white font-bold bg-primary px-5">Comprar</button>
+                    <button className="rounded-full border-2 border-solid border-primary w-32 text-base text-center text-primary font-bold px-4">🎁Comprar Regalo</button>
                 </>
             }
         </>
