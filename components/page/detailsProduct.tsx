@@ -1,8 +1,8 @@
 import { URL_BASE } from "@/lib/endpoint"
 import { parse } from "@/lib/snarkdown"
-import Img from "../ui/img";
 import StockProduct from "./stockProduct";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import ImageZoom from "./imgHoverProduct";
 
 const fetchProduct = (slug: any) => {
     return fetch(`${URL_BASE}/api/productos?filters[slug][$eq]=${slug}&populate=*`, {
@@ -17,36 +17,39 @@ const DetailsProduct = async ({ slug }: any) => {
     return (
         <div className="grid grid-cols-6 gap-6 px-24 py-8">
             <div className="col-span-4">
-                <Card>
+                <Card className="text-primary">
                     <CardHeader>
                         <CardTitle>{_product.data[0].attributes.nombre}</CardTitle>
                         <CardDescription>{_product.data[0].attributes.modelo.data !== null ? _product.data[0].attributes.modelo.data.attributes.nombre : 'SIN MODELO'}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="flex justify-center items-center">
-                            <Img url={_product.data[0].attributes.imagen.data[0].attributes.url} width={'350px'} height={'350px'} objectFit={"contain"} />
-                        </div>
-                        <div className="space-y-2 mt-10 flex justify-center gap-4">
-                            {_product.data[0].attributes.imagen.data.map((element: any) => <div key={element.id} className="rounded-3xl border-2 border-solid border-sky-900 w-[150px] h-[150px] flex justify-center items-center">
-                                <Img url={element.attributes.url} width={"100px"} height={"100px"} objectFit={"contain"} />
-                            </div>)
-                            }
-                        </div>
+                        <ImageZoom arrayImg={_product.data[0].attributes.imagen.data} imagePrimary={_product.data[0].attributes.imagen.data[0].attributes.url} />
                     </CardContent>
                 </Card>
             </div>
             <div className="col-span-2">
-                <Card>
+                <Card className="text-primary border-[4px] border-primary rounded-[60px]">
                     <CardContent className="p-8">
+                        <p className=" font-semibold"><span className=" font-extrabold">VARIACIONES</span> DEL PRODUCTO</p>
+                        <p className=" font-semibold">Sin variaciones</p>
+                        <p className="text-[46px] h-[44px] font-extrabold">Precio al Contado</p>
+                        
                         {
-                            _product.data[0].attributes.precio_oferta > 0
+                            _product.data[0].attributes.precio_oferta < 0
                                 ?
-                                <><p className="text-xl text-gray-600 line-through decoration-red-600"><span>{_product.data[0].attributes.precio}</span> <span>BS.</span></p><p className="text-5xl text-sky-800 font-extrabold uppercase"><span>{_product.data[0].attributes.precio_oferta}</span> Bs.</p></>
-                                : <p className="text-5xl text-sky-800 font-extrabold uppercase"><span>{_product.data[0].attributes.precio}</span> Bs.</p>
+                                <><p className="text-xl text-gray-600 line-through decoration-red-600"><span>{_product.data[0].attributes.precio}</span> <span>BS.</span></p><p className="text-5xl text-primary font-extrabold uppercase"><span>{_product.data[0].attributes.precio_oferta}</span> Bs.</p></>
+                                : <p className="text-[46px] font-extrabold"><span className="text-[25px]">BS.</span>{_product.data[0].attributes.precio}</p>
+                                
                         }
 
-                        <p className="my-2"><span className="text-sky-800 font-medium">ENVIÓ A DOMICILIO </span><span className="text-sky-800 font-extrabold">DISPONIBLE.</span></p>
-                        <p className="border-2 border-solid border-sky-900"></p>
+                        <div className="flex flex-col w-2/3 border-[1px] border-primary rounded-[45px] p-4">
+                            <p className="text-[26px] h-[24px] font-extrabold"><span>11 Cuotas</span></p>
+                            <p  className="text-[36px] h-[34px] font-extrabold"><span className="text-[25px]">BS.</span>00000.00</p>
+                            <p className="text-center mt-3"><span className=" underline font-extrabold">Solicita tu Crédito</span></p>
+                        </div>
+
+                        <p className="my-2 tracking-[2px] text-center text-xl"><span className="text-primary font-bold">ENVIÓ A DOMICILIO </span><span className="text-primary font-extrabold">DISPONIBLE.</span></p>
+                        <p className="border-2 border-solid border-primary"></p>
                         <p>{_product.data[0].attributes.descripcion_corta}</p>
                         <div className="flex space-x-2 mt-4">
                             <StockProduct product={{
@@ -64,22 +67,22 @@ const DetailsProduct = async ({ slug }: any) => {
                 </Card>
             </div>
             <div className="col-span-3">
-                <Card>
+                <Card className="text-primary">
                     <CardHeader>
                         <CardTitle>Caracteristicas</CardTitle>
                     </CardHeader>
                     <CardContent className="">
-                        <div className="" dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.caracteristica) }}></div>
+                        <div className="text-primary" id="idCaracteristicas" dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.caracteristica) }}></div>
                     </CardContent>
                 </Card>
             </div>
             <div className="col-span-3">
-                <Card>
+                <Card className="text-primary">
                     <CardHeader>
                         <CardTitle>Especificaciones</CardTitle>
                     </CardHeader>
                     <CardContent className="">
-                        <div className="" dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.especificacion) }}></div>
+                        <div className=""  dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.especificacion) }}></div>
                     </CardContent>
                 </Card>
             </div>
