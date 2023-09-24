@@ -1,14 +1,11 @@
-import { URL_BASE } from "@/lib/endpoint"
+'use client'
 import Img from "../ui/img";
 import Link from "next/link";
-import TitleSection from "../ui/titleSection";
-import { Badge } from "../ui/badge";
-const fetchProducts = () => {
-    return fetch(`${URL_BASE}/api/productos?populate[imagen][fields][0]=url&paginate[page]=2&pagination[start]=0&pagination[limit]=9`, {
-        cache: 'no-cache'
-    })
-        .then(res => res.json())
-}
+import React, { useEffect, useState } from 'react';
+import TitleBorder from "../ui/titleBorder";
+import { ChevronLeftCircle, ChevronRightCircle } from "lucide-react";
+import { lenghtText } from "@/lib/string";
+
 
 const dividirArrayEnGrupos = (array: [], tamanoGrupo = 3) => {
     const grupos = [];
@@ -19,55 +16,61 @@ const dividirArrayEnGrupos = (array: [], tamanoGrupo = 3) => {
 }
 
 
-const ListProductsHome = async () => {
-    const categories = await fetchProducts()
-    const categoriesArray = dividirArrayEnGrupos(categories.data, 3)
+const ListProductsHome = () => {
+    const [products, setProducts] = useState<any>([])
+    const [elementActive, setElementActive] = useState(0);
+    const elementQ = products?.length;
+
+    const nextElement = () => {
+        setElementActive(elementActive === elementQ - 1 ? 0 : elementActive + 1);
+    };
+
+    const backElement = () => {
+        setElementActive(elementActive === 0 ? elementQ - 1 : elementActive - 1);
+    };
+
+    useEffect(() => {
+        async function fetchProducts() {
+            const res = await fetch(`https://www.dashboard.hauscenter.com.bo/api/productos?populate[imagen][fields][0]=url&pagination[start]=0&pagination[limit]=10`, {
+                cache: 'no-store'
+            })
+
+            if (!res.ok) {
+                throw new Error('Failed to fetch data')
+            }
+            const response = await res.json()
+            const _products = dividirArrayEnGrupos(response.data)
+            setProducts(_products)
+        }
+        fetchProducts()
+    }, [])
+
 
     return (
         <>
-            <TitleSection title={'Productos'} subtitle={'recien agregado'} />
-            <div className="container mx-auto p-4">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div className="grid gap-4">
-                        {
-                            categoriesArray[0].map((category : any) => (
-                                <Link href={`/producto/${category.id}`} key={category.id} className="w-full h-full rounded-2xl border-[1px] border-primary p-2">
-                                    <Badge className="absolute text-base">Bs. {category.attributes.precio}</Badge>
-                                    <div className="flex justify-center items-center p-10 border-[1px] border-gray-300 rounded-2xl">
-                                        <Img className='h-auto max-w-full' url={category.attributes.imagen.data[0].attributes.url} width={'100%'} height={'100%'} objectFit={'cover'} />
-                                    </div>
-                                    <p className="mt-6 font-semibold text-sm text-center">{category.attributes.nombre} </p>
+            <TitleBorder title="Productos recien agregados" />
+            <div className="flex mx-28 justify-center">
+                <button className="mx-4" onClick={backElement}><ChevronLeftCircle size={48} strokeWidth={2.25} color="#84848b" /></button>
+                {
+                    products.map((_products: any, index: any) => (
+                        <div key={index} className={`slider grid grid-cols-3 gap-10 transition duration-150 ease-out ${elementActive === index ? ' block' : ' hidden'}`}>
+                            {
+                                _products.map((prod: any) => (
+                                    <Link href={'/'} key={prod.id} className="flex flex-col content-between border-2 border-primary rounded-[50px] p-6 h-[342px] w-[290px]">
+                                        <div className="flex justify-center items-center">
+                                            <Img url={prod.attributes.imagen.data[0].attributes.url} width={"85%"} height={"85%"} objectFit={"contain"} />
+                                        </div>
+                                        <div className="mt-auto">
+                                            <p className="text-primary font-light text-center">{lenghtText(prod.attributes.nombre, 60)}</p>
+                                            <p className="font-extrabold text-primary text-center">Bs {prod.attributes.precio}</p>
+                                        </div>
                                 </Link>
                             ))
                         }
-                    </div>
-                    <div className="grid gap-4">
-                        {
-                            categoriesArray[1].map((category : any) => (
-                                <Link href={`/producto/${category.id}`} key={category.id} className="w-full h-full rounded-2xl border-[1px] border-primary p-2">
-                                    <Badge className="absolute text-base">Bs. {category.attributes.precio}</Badge>
-                                    <div className="flex justify-center items-center p-10 border-[1px] border-gray-300 rounded-2xl">
-                                        <Img className='h-auto max-w-full' url={category.attributes.imagen.data[0].attributes.url} width={'100%'} height={'100%'} objectFit={'cover'} />
-                                    </div>
-                                    <p className="mt-6 font-semibold text-sm text-center">{category.attributes.nombre} </p>
-                                </Link>
-                            ))
-                        }
-                    </div>
-                    <div className="grid gap-4">
-                        {
-                            categoriesArray[2].map((category : any) => (
-                                <Link href={`/producto/${category.id}`} key={category.id} className="w-full h-full rounded-2xl border-[1px] border-primary p-2">
-                                    <Badge className="absolute text-base">Bs. {category.attributes.precio}</Badge>
-                                    <div className="flex justify-center items-center p-10 border-[1px] border-gray-300 rounded-2xl">
-                                        <Img className='h-auto max-w-full' url={category.attributes.imagen.data[0].attributes.url} width={'100%'} height={'100%'} objectFit={'cover'} />
-                                    </div>
-                                    <p className="mt-6 font-semibold text-sm text-center">{category.attributes.nombre} </p>
-                                </Link>
-                            ))
-                        }
-                    </div>
-                </div>
+                        </div>
+                    ))
+                }
+                <button className="mx-4" onClick={nextElement}><ChevronRightCircle size={48} strokeWidth={2.25} color="#84848b" /></button>
             </div>
         </>
     )
