@@ -12,7 +12,7 @@ const LogIn = () => {
     }
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+            <DropdownMenuTrigger>Mi Cuenta</DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
                 <DropdownMenuSeparator />    
