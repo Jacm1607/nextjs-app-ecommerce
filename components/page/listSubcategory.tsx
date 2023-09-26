@@ -51,11 +51,12 @@ export interface Meta {
 }
 
 interface ICategoria {
-    slug: any
+    slug: any;
+    idSubcategory: any;
 }
 
 
-const ListSubcategory = ({ slug: slug }: ICategoria) => {
+const ListSubcategory = ({ slug: slug, idSubcategory }: ICategoria) => {
     const [subcategory, setSubcategory] = useState<any>();
     const [category, setCategory] = useState<any>();
     const [products, setProducts] = useState([])
@@ -104,7 +105,7 @@ const ListSubcategory = ({ slug: slug }: ICategoria) => {
             })
             const jsonResponse = await respose.json();
             setCategory(jsonResponse.data[0])
-            fetchProduct(jsonResponse.data[0].attributes.subcategorias.data[0].id)
+            fetchProduct(idSubcategory)
             setLoadingSubcategory(false);
         }
         fetchSubcategories()
@@ -129,11 +130,11 @@ const ListSubcategory = ({ slug: slug }: ICategoria) => {
                                         {
                                             category.attributes.subcategorias.data.length > 0 ? (
                                                 category.attributes.subcategorias.data.map((subcategory: any) => (
-                                                    <div onClick={() => fetchProduct(subcategory.id)} key={subcategory.id} className="cursor-pointer flex-shrink-0 relative w-[220px] h-[190px] flex justify-center items-center">
+                                                    <Link href={`/categoria/${category.attributes.slug}/${subcategory.id}`} key={subcategory.id} className="cursor-pointer flex-shrink-0 relative w-[220px] h-[190px] flex justify-center items-center">
                                                         <div className="absolute w-full h-full bg-black bg-opacity-60 rounded-2xl"></div>
                                                         <Img url={subcategory.attributes.imagen.data.attributes.url} alt={subcategory.attributes.nombre} qwidth={200} qheight={100} width={"70%"} height={"70%"} objectFit={"contain"}></Img>
                                                         <p className="absolute text-white text-2xl font-bold text-center mt-[90px]">{subcategory.attributes.nombre}</p>
-                                                    </div>
+                                                    </Link>
                                                 ))
                                             ) : <></>
                                         }
