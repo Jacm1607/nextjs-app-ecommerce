@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ItemsNavbar } from './itemsNavbar';
 import { ShoppingCart } from 'lucide-react';
 import LogIn from './user-login';
+import { Separator } from './separator';
 
 const Navbar = () => {
     return (
@@ -17,13 +18,12 @@ const Navbar = () => {
                     <ItemsNavbar />
                 </div>
                 <form action="/buscador" className="col-span-2 flex w-full items-center" method="get" autoComplete='off' >
-                    {/* <div className=""> */}
                     <Input name='query' className=' rounded-r-none' type="text" placeholder="Buscar producto..." />
                     <Button className='rounded-l-none' variant={'secondary'} type="submit">Buscar</Button>
-                    {/* </div> */}
                 </form>
-                <div className="col-span-2 flex justify-end items-center text-white space-x-2">
-                    <Link href={'/carrito-compra'} className='px-4 py-2 text-center w-[120px] flex items-center'> <ShoppingCart size={20} color="#fff" /> <span className='ml-2'>Carrito</span></Link>
+                <div className="col-span-2 flex justify-end items-center text-white space-x-6 px-4">
+                    <Link href={'/carrito-compra'} className='text-center'> <ShoppingCart size={38} color="#fff" /></Link>
+                    <Separator orientation="vertical" className='h-1/2' />
                     {/* <Link href={'/'} className='px-4 py-2 bg-black'>Favorito</Link> */}
                     <LogIn />
                 </div>
@@ -35,7 +35,7 @@ const Navbar = () => {
                 </div>
                 <div className="grid grid-cols-3 gap-3 text-center py-4 bg-gray-300 text-2xl font-bold text-primary">
                     <div className="col-span-1"><Link href={'/credi-haus'}>CREDI HAUS</Link></div>
-                    <div className="col-span-1 border-l-2 border-r-2 border-primary"><Link href={'/'}>SEGUIMIENTO DE PEDIDO</Link></div>
+                    <div className="col-span-1 border-l-2 border-r-2 border-primary"><Link href={'/seguimiento-pedido'}>SEGUIMIENTO DE PEDIDO</Link></div>
                     <div className="col-span-1"><Link href={'/sucursales'}>SUCURSALES</Link></div>
                 </div>
             </div>
