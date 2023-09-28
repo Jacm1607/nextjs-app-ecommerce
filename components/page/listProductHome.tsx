@@ -53,7 +53,7 @@ const ListProductsHome = () => {
                     products.map((_products: any, index: any) => (
                         <div key={index} className={`slider grid grid-cols-3 gap-10 transition duration-150 ease-out ${elementActive === index ? ' block' : ' hidden'}`}>
                             {
-                                _products.map((product: any) => <CardProduct product={product} />)
+                                _products.map((product: any, key:any) => <CardProduct key={key} product={product} />)
                             }
                         </div>
                     ))
