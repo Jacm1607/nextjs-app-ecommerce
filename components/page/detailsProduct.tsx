@@ -3,19 +3,23 @@ import { parse } from "@/lib/snarkdown"
 import StockProduct from "./stockProduct";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import ImageZoom from "./imgHoverProduct";
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import { Separator } from "../ui/separator";
+
 
 const fetchProduct = (slug: any) => {
     return fetch(`${URL_BASE}/api/productos?filters[slug][$eq]=${slug}&populate=*`, {
         cache: 'no-store'
     })
-        .then(res => res.json())
+    .then(res => res.json())
 }
 
 
 const DetailsProduct = async ({ slug }: any) => {
     const _product = await fetchProduct(slug);
     return (
-        <div className="grid grid-cols-6 gap-6 px-24 py-8">
+        <div id="detailsProduct" className="grid grid-cols-6 gap-6 px-24 py-8">
             <div className="col-span-4">
                 <Card className="text-primary">
                     <CardHeader>
@@ -66,25 +70,15 @@ const DetailsProduct = async ({ slug }: any) => {
                     </CardContent>
                 </Card>
             </div>
-            <div className="col-span-3">
-                <Card className="text-primary">
-                    <CardHeader>
-                        <CardTitle>Caracteristicas</CardTitle>
-                    </CardHeader>
-                    <CardContent className="">
-                        <div className="text-primary" id="idCaracteristicas" dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.caracteristica) }}></div>
-                    </CardContent>
-                </Card>
+            <div className="col-span-3 text-primary uppercase my-6 py-4">
+                <span className=" text-4xl font-extrabold py-2">Caracteristicas</span>
+                <Separator className="bg-primary" />
+                <div className="my-4"> <Markdown remarkPlugins={[remarkGfm]}>{_product.data[0].attributes.caracteristica}</Markdown></div>
             </div>
-            <div className="col-span-3">
-                <Card className="text-primary">
-                    <CardHeader>
-                        <CardTitle>Especificaciones</CardTitle>
-                    </CardHeader>
-                    <CardContent className="">
-                        <div className=""  dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.especificacion) }}></div>
-                    </CardContent>
-                </Card>
+            <div className="col-span-3 text-primary uppercase my-6 py-4">
+                <span className=" text-4xl font-extrabold py-2">INFORMACIÓN ADICIONAL</span>
+                <Separator className="bg-primary" />
+                <div className="my-4"  dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.especificacion) }}></div>
             </div>
         </div>
     )

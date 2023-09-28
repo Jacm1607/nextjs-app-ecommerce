@@ -75,14 +75,35 @@
   }
 }
 
-#idCaracteristicas li:nth-child(even) {
-  background-color: #ACACAC; /* Color para elementos pares */
-  font-weight: 900;
-  font-size: large;
+#detailsProduct tr:nth-child(odd) {
+  background-color: white;
 }
 
-#idCaracteristicas li:nth-child(odd) {
-  background-color: #ffffff; /* Color para elementos impares */
-  font-weight: 900;
-  font-size: large;
+#detailsProduct tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
+
+#detailsProduct td:nth-child(odd) {
+  background-color: white;
+}
+
+#detailsProduct td:nth-child(odd) {
+  font-weight: 800;
+}
+
+#detailsProduct table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#detailsProduct th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: x-large;
+}
+
+#detailsProduct h3 {
+  font-size: x-large;
+  font-weight: 800;
 }
