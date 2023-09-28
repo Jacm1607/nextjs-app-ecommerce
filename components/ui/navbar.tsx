@@ -33,10 +33,10 @@ const Navbar = () => {
                 <div className='w-full flex justify-center bg-white'>
                     <p className='text-primary font-bold text-4xl my-4'>CRÉDITOS APROBADOS EN 24 HORAS</p>
                 </div>
-                <div className="grid grid-cols-3 gap-3 text-center py-4 bg-gray-300 text-2xl font-bold text-primary">
-                    <div className="col-span-1"><Link href={'/credi-haus'}>CREDI HAUS</Link></div>
-                    <div className="col-span-1 border-l-2 border-r-2 border-primary"><Link href={'/seguimiento-pedido'}>SEGUIMIENTO DE PEDIDO</Link></div>
-                    <div className="col-span-1"><Link href={'/sucursales'}>SUCURSALES</Link></div>
+                <div className="grid grid-cols-3 gap-3 text-center py-4 bg-gray-300 text-2xl font-bold text-primary divide-x-2 divide-primary">
+                    <Link href={'/credi-haus'} className="col-span-1">CREDI HAUS</Link>
+                    <Link href={'/seguimiento-pedido'} className="col-span-1">SEGUIMIENTO DE PEDIDO</Link>
+                    <Link href={'/sucursales'} className="col-span-1">SUCURSALES</Link>
                 </div>
             </div>
         </div>
