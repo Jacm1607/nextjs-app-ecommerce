@@ -42,8 +42,6 @@ const fetchCategories = () => {
 
 const CategoryHome = async () => {
     const categories = await fetchCategories()
-    console.log(categories);
-    
     return (
             <ScrollArea className="col-span-4">
                 <div className="flex space-x-4 pb-4">

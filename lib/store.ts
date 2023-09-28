@@ -7,13 +7,11 @@ export const getProductStore = () => {
 }
 export const  addProductStore = (product:any, q:any) => {
     product.cantidad = q;
-    console.log(product)
     let productsStore = getProductStore();
     if (!productsStore) {
         localStorage.setItem('products', '[]')
     }
     const iStore = productsStore.findIndex((productStore:any) => productStore.id === product.id);
-    console.log(iStore);
     
     if (iStore !== -1) {
       productsStore[iStore] = product;

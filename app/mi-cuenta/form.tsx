@@ -41,7 +41,6 @@ const MyAccount = () => {
                     setLoading(false);
                 }
             } catch (error) {
-               console.log(error)
             }
         };
         if (token == null || token == undefined || token == 'null' || token == 'undefined') {
@@ -115,7 +114,6 @@ const MyAccount = () => {
             })
 
             const response = await registerDataForm.json()
-            console.log(response);
 
 
             if (registerDataForm.ok) {
@@ -124,7 +122,6 @@ const MyAccount = () => {
                 alert('Ocurrio un error intente ingresando con otros datos');   
             }
         } catch (error) {
-            console.log(error);
             alert("Error al registrar. Por favor, intenta de nuevo.");
         }
     };
@@ -146,8 +143,6 @@ const MyAccount = () => {
             })
 
             const response = await loginDataForm.json()
-            console.log(response);
-
             if (loginDataForm.ok) {
                 setUser(response)
                 updateToken(response.jwt)
@@ -156,7 +151,6 @@ const MyAccount = () => {
             }
 
         } catch (error) {
-            console.log(error);
             alert("Error al iniciar sesión. Por favor, intenta con otra cuenta.");
 
         }
@@ -214,10 +208,6 @@ const Profile = ({ user, handleSubmitUpdate, closeSession, handleEmailChange, ha
                 fecha_nac: dateBirth.lenght ?? new Date(),
                 direccion_principal: addressPrimary
             };
-            console.log(userData);
-
-            console.log(token);
-
             const responseUserProfile = await fetch(`https://www.dashboard.hauscenter.com.bo/api/users/${user.id}`, {
                 method: 'PUT',
                 headers: {
@@ -230,7 +220,6 @@ const Profile = ({ user, handleSubmitUpdate, closeSession, handleEmailChange, ha
             const dataUserProfile = await responseUserProfile.json()
 
 
-            console.log(dataUserProfile);
             if (responseUserProfile.ok) {
 
                 alert("Información actualizada");
@@ -238,8 +227,6 @@ const Profile = ({ user, handleSubmitUpdate, closeSession, handleEmailChange, ha
                 alert ('Ocurrio un error revise sus datos y vuelva a intentar.')
             }
         } catch (error) {
-            console.log(error);
-
             alert("Error al actualizar la información. Por favor, intenta de nuevo.");
         }
     }
@@ -253,8 +240,6 @@ const Profile = ({ user, handleSubmitUpdate, closeSession, handleEmailChange, ha
                 nit
             };
 
-            console.log(billingData);
-
             const responseUserProfile = await fetch(`https://www.dashboard.hauscenter.com.bo/api/users/${user.id}`, {
                 method: 'PUT',
                 headers: {
@@ -267,13 +252,10 @@ const Profile = ({ user, handleSubmitUpdate, closeSession, handleEmailChange, ha
             const dataUserBilling = await responseUserProfile.json()
 
 
-            console.log(dataUserBilling);
             if (responseUserProfile.ok) {
                 alert("Información actualizada");
             }
         } catch (error) {
-            console.log(error);
-
             alert("Error al actualizar la información. Por favor, intenta de nuevo.");
         }
     }

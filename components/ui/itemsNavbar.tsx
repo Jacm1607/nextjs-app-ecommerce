@@ -34,14 +34,10 @@ export function ItemsNavbar() {
         cache: 'no-store'
       })
       const responseCategories = await categories.json()
-      console.log(responseCategories);
-      
       setCategories(responseCategories)
     }
 
     getCategories()
-    console.log(categories);
-    
   }, [])
   
   return (
