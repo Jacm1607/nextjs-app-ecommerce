@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { Banknote, Car, CreditCard, QrCode, Zap } from "lucide-react";
+import { Banknote, Car, CreditCard, QrCode, Store, Zap } from "lucide-react";
 
 
 const FormShop = () => {
@@ -282,7 +282,7 @@ const FormShop = () => {
                       htmlFor="standard"
                       className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                     >
-                      <Car size={20} color="#0d0d0d" strokeWidth={2.25} />
+                      <Car color="#0d0d0d" strokeWidth={2.25} />
                       <span className="text-base font-bold text-gray-900 leading-4 text-center">Envío a domicilio</span>
                     </Label>
                   </div>
@@ -297,8 +297,8 @@ const FormShop = () => {
                       htmlFor="premium"
                       className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                     >
-                      <Zap size={20} color="#0d0d0d" strokeWidth={2.25} />
-                      <span className="text-base font-bold text-gray-900">Express</span>
+                      <Store color="#0d0d0d" strokeWidth={2.5} />
+                      <span className="text-base font-bold text-gray-900 leading-4 text-center">Recojo en Tienda</span>
                     </Label>
                   </div>
                 </RadioGroup>
