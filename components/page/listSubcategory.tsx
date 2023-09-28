@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Slider } from "../ui/slider";
 import Link from "next/link";
+import { validateOffer } from "@/lib/helpers";
 export interface ISubcategory {
     data: DAT;
     meta: Meta;
@@ -234,7 +235,9 @@ const ListProducts = ({ loadingProduct, products, onChangeOrderByPrice, newFetch
                                                             <p className=" font-extrabold text-lg text-primary">{product.attributes.nombre}</p>
                                                             <p className=" text-sm text-gray-700">{product.attributes.descripcion_corta}</p>
                                                         </div>
-                                                        <Badge className="absolute m-3">Bs. {product.attributes.precio}</Badge>
+                                                        {
+                                                            validateOffer(product.attributes.precio, product.attributes.precio_oferta, product.attributes.inicio_oferta, product.attributes.limite_oferta) ? <Badge className="absolute m-3 bg-red-500">OFERTA Bs. {product.attributes.precio_oferta}</Badge> :<Badge className="absolute m-3">Bs. {product.attributes.precio}</Badge>
+                                                        }
                                                     </div>
                                                     </Link>
                                                 )) : <div className="">
