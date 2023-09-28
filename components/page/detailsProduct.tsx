@@ -1,12 +1,13 @@
 import { URL_BASE } from "@/lib/endpoint"
 import { parse } from "@/lib/snarkdown"
 import StockProduct from "./stockProduct";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import ImageZoom from "./imgHoverProduct";
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Separator } from "../ui/separator";
 import { validateOffer } from "@/lib/helpers";
+import Favorite from "@/app/producto/[slug]/favorite";
 
 
 const fetchProduct = (slug: any) => {
@@ -74,6 +75,9 @@ const DetailsProduct = async ({ slug }: any) => {
                             }} />
                         </div>
                     </CardContent>
+                    <CardFooter className="px-8">
+                        <Favorite />
+                    </CardFooter>
                 </Card>
             </div>
             <div className="col-span-3 text-primary uppercase my-6 py-4">
