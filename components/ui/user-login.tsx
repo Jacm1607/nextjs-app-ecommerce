@@ -17,7 +17,7 @@ const LogIn = () => {
                 <DropdownMenuLabel>Mi Cuenta</DropdownMenuLabel>
                 <DropdownMenuSeparator />    
                 {
-                    token ? <><DropdownMenuItem><Link href={'mi-cuenta'}>Mi perfil</Link></DropdownMenuItem><DropdownMenuItem onClick={logOut} >Cerrar sesión</DropdownMenuItem></> : <DropdownMenuItem><Link href={'mi-cuenta'}>Iniciar sesión</Link></DropdownMenuItem>
+                    token ? <><DropdownMenuItem><Link href={'/mi-cuenta'}>Mi perfil</Link></DropdownMenuItem><DropdownMenuItem onClick={logOut} >Cerrar sesión</DropdownMenuItem></> : <DropdownMenuItem><Link href={'/mi-cuenta'}>Iniciar sesión</Link></DropdownMenuItem>
                 }
             </DropdownMenuContent>
         </DropdownMenu>
