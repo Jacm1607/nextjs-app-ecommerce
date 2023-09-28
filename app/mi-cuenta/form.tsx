@@ -489,7 +489,8 @@ const PageCuenta = ({ handleSubmit, handleEmailChange, handlePasswordChange, han
                                 <Input
                                     onChange={handlePasswordChange}
                                     className="border-gray-800 border-opacity-40"
-                                    id="email"
+                                    type="password"
+                                    id="password"
                                     placeholder="Ingresa tu contraseña"
                                 />
                             </div>
