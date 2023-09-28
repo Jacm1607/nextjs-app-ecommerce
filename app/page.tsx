@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       
-    <main className="flex min-h-screen flex-col p-24">
+    <main className="flex min-h-screen flex-col p-24 pb-0">
       <div className="relative w-full h-[430px] bg-gradient-to-t from-[#0F2027] via-[#203A43] to-[#2C5364] rounded-2xl">
         <div className="absolute p-8 flex flex-col h-full">
           <div className="">
