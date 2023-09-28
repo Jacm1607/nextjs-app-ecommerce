@@ -84,10 +84,6 @@
 }
 
 #detailsProduct td:nth-child(odd) {
-  background-color: white;
-}
-
-#detailsProduct td:nth-child(odd) {
   font-weight: 800;
 }
 
