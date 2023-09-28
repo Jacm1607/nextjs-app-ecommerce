@@ -6,13 +6,14 @@ import ImageZoom from "./imgHoverProduct";
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Separator } from "../ui/separator";
+import { validateOffer } from "@/lib/helpers";
 
 
 const fetchProduct = (slug: any) => {
     return fetch(`${URL_BASE}/api/productos?filters[slug][$eq]=${slug}&populate=*`, {
         cache: 'no-store'
     })
-    .then(res => res.json())
+        .then(res => res.json())
 }
 
 
@@ -36,19 +37,24 @@ const DetailsProduct = async ({ slug }: any) => {
                     <CardContent className="p-8">
                         <p className=" font-semibold"><span className=" font-extrabold">VARIACIONES</span> DEL PRODUCTO</p>
                         <p className=" font-semibold">Sin variaciones</p>
-                        <p className="text-[46px] h-[44px] font-extrabold">Precio al Contado</p>
-                        
                         {
-                            _product.data[0].attributes.precio_oferta < 0
+                            validateOffer(_product.data[0].attributes.precio, _product.data[0].attributes.precio_oferta, _product.data[0].attributes.inicio_oferta, _product.data[0].attributes.limite_oferta)
                                 ?
-                                <><p className="text-xl text-gray-600 line-through decoration-red-600"><span>{_product.data[0].attributes.precio}</span> <span>BS.</span></p><p className="text-5xl text-primary font-extrabold uppercase"><span>{_product.data[0].attributes.precio_oferta}</span> Bs.</p></>
-                                : <p className="text-[46px] font-extrabold"><span className="text-[25px]">BS.</span>{_product.data[0].attributes.precio}</p>
-                                
+                                <>
+                                    <p className="text-[46px] h-[44px] font-extrabold">Precio al Contado</p>
+                                    <p className="text-[46px] font-extrabold"><span className="text-[25px]">BS.</span>{_product.data[0].attributes.precio_oferta}</p>
+                                    <p className="text-[26px] h-[30px] font-extrabold text-primary/50">Precio Antes</p>
+                                    <p className="text-xl font-extrabold text-primary/50 line-through decoration-red-600 "><span className="text-xl">BS.</span>{_product.data[0].attributes.precio}</p>
+                                </>
+                                :
+                                <>
+                                    <p className="text-[46px] h-[44px] font-extrabold">Precio al Contado</p>
+                                    <p className="text-[46px] font-extrabold"><span className="text-[25px]">BS.</span>{_product.data[0].attributes.precio}</p>
+                                </>
                         }
-
                         <div className="flex flex-col w-2/3 border-[1px] border-primary rounded-[45px] p-4">
                             <p className="text-[26px] h-[24px] font-extrabold"><span>11 Cuotas</span></p>
-                            <p  className="text-[36px] h-[34px] font-extrabold"><span className="text-[25px]">BS.</span>00000.00</p>
+                            <p className="text-[36px] h-[34px] font-extrabold"><span className="text-[25px]">BS.</span>00000.00</p>
                             <p className="text-center mt-3"><span className=" underline font-extrabold">Solicita tu Crédito</span></p>
                         </div>
 
@@ -78,7 +84,7 @@ const DetailsProduct = async ({ slug }: any) => {
             <div className="col-span-3 text-primary uppercase my-6 py-4">
                 <span className=" text-4xl font-extrabold py-2">INFORMACIÓN ADICIONAL</span>
                 <Separator className="bg-primary" />
-                <div className="my-4"  dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.especificacion) }}></div>
+                <div className="my-4" dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.especificacion) }}></div>
             </div>
         </div>
     )
