@@ -8,6 +8,8 @@ import remarkGfm from 'remark-gfm'
 import { Separator } from "../ui/separator";
 import { validateOffer } from "@/lib/helpers";
 import Favorite from "@/app/producto/[slug]/favorite";
+import TitleBorder from "../ui/titleBorder";
+import CardProduct from "../ui/cardProduct";
 
 
 const fetchProduct = (slug: any) => {
@@ -90,7 +92,35 @@ const DetailsProduct = async ({ slug }: any) => {
                 <Separator className="bg-primary" />
                 <div className="my-4" dangerouslySetInnerHTML={{ __html: parse(_product.data[0].attributes.especificacion) }}></div>
             </div>
+
+
+            <div className="col-span-6">
+                <TitleBorder title="PRODUCTOS RELACIONADOS" />
+                <div className="columns-4">
+                    <CardsProducts subcategory={_product.data[0].attributes.subcategoria.data.id} idProduct={_product.data[0].id} />
+                </div>
+            </div>
         </div>
+    )
+}
+
+const fetchSimilarProduct = async (subcategory: string, idProduct:any) => {
+    const responseProductSimilar = await fetch(`${URL_BASE}/api/productos?populate[imagen]=*&filters[subcategoria][id][$eq]=${subcategory}&filters[id][$ne]=${idProduct}&pagination[limit]=4`, {
+        cache: 'no-store'
+    })
+
+    const dataProductsSimilar = await responseProductSimilar.json();
+    return dataProductsSimilar
+}
+
+const CardsProducts = async ({ subcategory, idProduct }: any) => {
+    const productsSimilar = await fetchSimilarProduct(subcategory, idProduct)
+    return (
+        <>
+            {
+                productsSimilar.data.map((product: any) => <CardProduct key={product.id} product={product} />)
+            }
+        </>
     )
 }
 
