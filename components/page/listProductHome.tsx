@@ -1,10 +1,8 @@
 'use client'
-import Img from "../ui/img";
-import Link from "next/link";
 import React, { useEffect, useState } from 'react';
 import TitleBorder from "../ui/titleBorder";
 import { ChevronLeftCircle, ChevronRightCircle } from "lucide-react";
-import { lenghtText } from "@/lib/string";
+import CardProduct from "../ui/cardProduct";
 
 
 const dividirArrayEnGrupos = (array: [], tamanoGrupo = 3) => {
@@ -55,18 +53,8 @@ const ListProductsHome = () => {
                     products.map((_products: any, index: any) => (
                         <div key={index} className={`slider grid grid-cols-3 gap-10 transition duration-150 ease-out ${elementActive === index ? ' block' : ' hidden'}`}>
                             {
-                                _products.map((prod: any) => (
-                                    <Link href={'/'} key={prod.id} className="flex flex-col content-between border-2 border-primary rounded-[50px] p-6 h-[342px] w-[290px]">
-                                        <div className="flex justify-center items-center">
-                                            <Img url={prod.attributes.imagen.data[0].attributes.url} width={"85%"} height={"85%"} objectFit={"contain"} />
-                                        </div>
-                                        <div className="mt-auto">
-                                            <p className="text-primary font-light text-center">{lenghtText(prod.attributes.nombre, 60)}</p>
-                                            <p className="font-extrabold text-primary text-center">Bs {prod.attributes.precio}</p>
-                                        </div>
-                                </Link>
-                            ))
-                        }
+                                _products.map((product: any) => <CardProduct product={product} />)
+                            }
                         </div>
                     ))
                 }
