@@ -269,7 +269,7 @@ const FormShop = () => {
           <div className="col-span-1">
             <Card>
               <CardHeader>
-                <CardTitle>Método de Envío</CardTitle>
+                <CardTitle>Métodos de Entrega</CardTitle>
                 <CardDescription>
                   Seleccione un método para establecer el envío de su producto.
                 </CardDescription>
