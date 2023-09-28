@@ -56,15 +56,15 @@ const AdsHome = async () => {
             <div className="flex justify-center">
                 <div className="grid grid-rows-4 grid-cols-5 gap-4 w-10/12">
                     <div className="md:row-span-4 row-span-2 md:col-span-3 col-span-5">
-                        <Img url={images.data.attributes.imgNovedad1.data.attributes.url} width={"100%"} height={"100%"} objectFit={"cover"} />
+                        <Img url={images.data.attributes.imgNovedad1.data.attributes.url} className="rounded-3xl" width={"100%"} height={"100%"} objectFit={"cover"} />
                     </div>
 
-                    <div className="md:row-span-2 row-span-2 md:col-span-2 col-span-5 bg-sky-500">
-                        <Img url={images.data.attributes.imgNovedad2.data.attributes.url} width={"100%"} height={"100%"} objectFit={"cover"} />
+                    <div className="md:row-span-2 row-span-2 md:col-span-2 col-span-5">
+                        <Img url={images.data.attributes.imgNovedad2.data.attributes.url} className="rounded-3xl" width={"100%"} height={"100%"} objectFit={"cover"} />
                     </div>
 
-                    <div className="md:row-span-2 row-span-2 md:col-span-2 col-span-5 bg-sky-300">
-                        <Img url={images.data.attributes.imgNovedad3.data.attributes.url} width={"100%"} height={"100%"} objectFit={"cover"} />
+                    <div className="md:row-span-2 row-span-2 md:col-span-2 col-span-5">
+                        <Img url={images.data.attributes.imgNovedad3.data.attributes.url} className="rounded-3xl" width={"100%"} height={"100%"} objectFit={"cover"} />
                     </div>
                 </div>
             </div>
