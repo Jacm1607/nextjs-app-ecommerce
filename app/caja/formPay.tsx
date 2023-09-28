@@ -283,7 +283,7 @@ const FormShop = () => {
                       className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                     >
                       <Car size={20} color="#0d0d0d" strokeWidth={2.25} />
-                      <span className="text-base font-bold text-gray-900">Normal</span>
+                      <span className="text-base font-bold text-gray-900 leading-4 text-center">Envío a domicilio</span>
                     </Label>
                   </div>
                   <div>
