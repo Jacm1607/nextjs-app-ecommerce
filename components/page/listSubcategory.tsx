@@ -61,12 +61,15 @@ const ListSubcategory = ({ slug: slug, idSubcategory }: ICategoria) => {
     const [subcategory, setSubcategory] = useState<any>();
     const [category, setCategory] = useState<any>();
     const [products, setProducts] = useState([])
+    const [brands, setBrands] = useState([])
     const [loadingSubcategory, setLoadingSubcategory] = useState(true)
     const [loadingProduct, setLoadingProduct] = useState(true)
+    const [loadingBrand, setLoadingBrand] = useState(true)
 
     const [orderByPrice, setOrderByPrice] = useState('asc')
     const [priceMin, setPriceMin] = useState(1)
     const [priceMax, setPriceMax] = useState(100000)
+    const [brand, setBrand] = useState();
 
     const onChangeOrderByPrice = (orderBy: string) => {
         setOrderByPrice(orderBy)
@@ -80,7 +83,7 @@ const ListSubcategory = ({ slug: slug, idSubcategory }: ICategoria) => {
     }
     const filterFetchProducts = async () => {
         setLoadingProduct(true);
-        const respose = await fetch(`${URL_BASE}/api/productos?populate[subcategoria]=*&filters[subcategoria][id][$eq]=${subcategory}&pagination[page]=1&populate[imagen][fields][0]=url&sort[0]=precio:${orderByPrice}&filters[precio][$gte]=${priceMin}&filters[precio][$lte]=${priceMax}`, {
+        const respose = await fetch(`${URL_BASE}/api/productos?populate[subcategoria]=*&filters[subcategoria][id][$eq]=${subcategory}&pagination[page]=1&populate[imagen][fields][0]=url&sort[0]=precio:${orderByPrice}&filters[precio][$gte]=${priceMin}&filters[precio][$lte]=${priceMax}${brand ? `&filters[marca][id][$eq]=${brand}` : ''}`, {
             cache: 'no-store'
         })
         const jsonResponse = await respose.json();
@@ -88,11 +91,20 @@ const ListSubcategory = ({ slug: slug, idSubcategory }: ICategoria) => {
         setLoadingProduct(false);
     }
 
+    const fetchBrand = async (products: any) => {
+        const ids = products.map((product: any, index: any) => `filters[id][$in][${index}]=${product.attributes.marca.data.id}`).join('&');
+        const responseBrand = await fetch(`${URL_BASE}/api/marcas?${ids}`)
+        const dataBrand = await responseBrand.json();
+        setBrands(dataBrand.data)
+        setLoadingBrand(false)
+    }
+
     const fetchProduct = async (subcategoria: any) => {
-        const respose = await fetch(`${URL_BASE}/api/productos?populate[subcategoria]=*&filters[subcategoria][id][$eq]=${subcategoria}&pagination[page]=1&populate[imagen][fields][0]=url&sort[0]=precio:${orderByPrice}`, {
+        const respose = await fetch(`${URL_BASE}/api/productos?populate[subcategoria]=*&filters[subcategoria][id][$eq]=${subcategoria}&pagination[page]=1&populate[imagen][fields][0]=url&populate[marca][fields][0]=nombre&sort[0]=precio:${orderByPrice}`, {
             cache: 'no-store'
         })
         const jsonResponse = await respose.json();
+        fetchBrand(jsonResponse.data);
         setSubcategory(subcategoria)
         setProducts(jsonResponse);
         setLoadingProduct(false);
@@ -144,7 +156,7 @@ const ListSubcategory = ({ slug: slug, idSubcategory }: ICategoria) => {
                                 </ScrollArea>
                             </div>
                         </div>
-                        <ListProducts onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMin={priceMin} priceMax={priceMax} newFetchProducts={filterFetchProducts} loadingProduct={loadingProduct} products={products} onChangeOrderByPrice={onChangeOrderByPrice} />
+                        <ListProducts loadingBrand={loadingBrand} brands={brands} setBrand={setBrand} onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMin={priceMin} priceMax={priceMax} newFetchProducts={filterFetchProducts} loadingProduct={loadingProduct} products={products} onChangeOrderByPrice={onChangeOrderByPrice} />
                     </>
                     : <div className="h-[700px] flex justify-center items-center">
                         <span>Cargando...</span>
@@ -158,7 +170,7 @@ const ListSubcategory = ({ slug: slug, idSubcategory }: ICategoria) => {
 interface ISubcategoria {
     subcategoria: any
 }
-export function Sidebar({ className, onChangeOrderByPrice, newFetchProducts, priceMax, priceMin, onChangePriceMax, onChangePriceMin }: any) {
+export function Sidebar({ className, onChangeOrderByPrice, newFetchProducts, priceMax, priceMin, onChangePriceMax, onChangePriceMin, brands, setBrand, loadingBrand }: any) {
     return (
         <div>
             <div className="space-y-4 py-4">
@@ -190,6 +202,27 @@ export function Sidebar({ className, onChangeOrderByPrice, newFetchProducts, pri
                         <p>Hasta {priceMax}</p>
                         <Slider onValueChange={(e) => onChangePriceMax(e)} defaultValue={[priceMax]} max={10000} step={10} />
                     </div>
+
+                    <h2 className="m-2 px-4 mt-8 text-2xl font-semibold tracking-tight text-primary">
+                        Marcas
+                    </h2>
+                    <div className="space-y-1 mx-8">
+                        <RadioGroup defaultValue="1">
+                            <div onClick={() => setBrand('')} className="flex items-center space-x-2">
+                                <RadioGroupItem value={'1'} id="default_brand" />
+                                <Label htmlFor="default_brand">TODOS</Label>
+                            </div>
+                            {
+                                loadingBrand ? <>Cargando marcas...</> : brands.map((brand: any) => (
+                                    <div key={brand.id} onClick={() => setBrand(brand.id)} className="flex items-center space-x-2">
+                                        <RadioGroupItem value={brand.id} id={brand.id} />
+                                        <Label htmlFor={brand.id}>{brand.attributes.nombre}</Label>
+                                    </div>
+                                ))
+                            }
+                        </RadioGroup>
+                    </div>
+
                     <div className="flex justify-end mt-8">
                         <Button onClick={newFetchProducts}>Filtrar</Button>
                     </div>
@@ -212,13 +245,13 @@ const SkeletonProduct = () => <div className="card">
     </div>
 </div>
 
-const ListProducts = ({ loadingProduct, products, onChangeOrderByPrice, newFetchProducts, priceMin, priceMax, onChangePriceMax, onChangePriceMin }: any) => {
+const ListProducts = ({ loadingProduct, products, onChangeOrderByPrice, newFetchProducts, priceMin, priceMax, onChangePriceMax, onChangePriceMin, brands, setBrand }: any) => {
     return (
         <div className="">
             <div className="border-t">
                 <div className="bg-background">
                     <div className="grid lg:grid-cols-5">
-                        <Sidebar onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMax={priceMax} priceMin={priceMin} newFetchProducts={newFetchProducts} onChangeOrderByPrice={onChangeOrderByPrice} className="hidden lg:block" />
+                        <Sidebar brands={brands} setBrand={setBrand} onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMax={priceMax} priceMin={priceMin} newFetchProducts={newFetchProducts} onChangeOrderByPrice={onChangeOrderByPrice} className="hidden lg:block" />
                         <div className="col-span-3 lg:col-span-4 lg:border-l">
                             <div className="h-full px-4 py-6 lg:px-8">
                                 <div defaultValue="music" className="h-full space-y-6">
@@ -227,18 +260,18 @@ const ListProducts = ({ loadingProduct, products, onChangeOrderByPrice, newFetch
                                             !loadingProduct ?
                                                 products.data.length > 0 ? products.data.map((product: any) => (
                                                     <Link key={product.id} href={`/producto/${product.attributes.slug}`}>
-                                                    <div className=" cursor-pointer flex border-2 border-sky-800 border-opacity-40 rounded-3xl">
-                                                        <div className="img p-4">
-                                                            <Img url={product.attributes.imagen.data[0].attributes.url} width={"140px"} height={"140px"} objectFit={"contain"} />
+                                                        <div className=" cursor-pointer flex border-2 border-sky-800 border-opacity-40 rounded-3xl">
+                                                            <div className="img p-4">
+                                                                <Img url={product.attributes.imagen.data[0].attributes.url} width={"140px"} height={"140px"} objectFit={"contain"} />
+                                                            </div>
+                                                            <div className="content py-4 pr-4">
+                                                                <p className=" font-extrabold text-lg text-primary">{product.attributes.nombre}</p>
+                                                                <p className=" text-sm text-gray-700">{product.attributes.descripcion_corta}</p>
+                                                            </div>
+                                                            {
+                                                                validateOffer(product.attributes.precio, product.attributes.precio_oferta, product.attributes.inicio_oferta, product.attributes.limite_oferta) ? <Badge className="absolute m-3 bg-red-500">OFERTA Bs. {product.attributes.precio_oferta}</Badge> : <Badge className="absolute m-3">Bs. {product.attributes.precio}</Badge>
+                                                            }
                                                         </div>
-                                                        <div className="content py-4 pr-4">
-                                                            <p className=" font-extrabold text-lg text-primary">{product.attributes.nombre}</p>
-                                                            <p className=" text-sm text-gray-700">{product.attributes.descripcion_corta}</p>
-                                                        </div>
-                                                        {
-                                                            validateOffer(product.attributes.precio, product.attributes.precio_oferta, product.attributes.inicio_oferta, product.attributes.limite_oferta) ? <Badge className="absolute m-3 bg-red-500">OFERTA Bs. {product.attributes.precio_oferta}</Badge> :<Badge className="absolute m-3">Bs. {product.attributes.precio}</Badge>
-                                                        }
-                                                    </div>
                                                     </Link>
                                                 )) : <div className="">
                                                     <span>No hay productos disponible por el momento</span>
