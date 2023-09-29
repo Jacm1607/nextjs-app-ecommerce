@@ -89,7 +89,7 @@ export default function Address() {
                                 </CardContent>
                                 <CardFooter className="flex justify-between space-x-2">
                                     <AlertGoogleMapsApi urlApi={branch.googleMaps} title={branch.name} />
-                                    <Link href={branch.url}>
+                                    <Link href={branch.url} target="_blank">
                                         <Button variant={'destructive'}>
                                             <div className="flex items-center space-x-1">
                                                 <MapPin color="#ffffff" /> <span>Ir a Google Maps</span>

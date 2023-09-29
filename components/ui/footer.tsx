@@ -12,7 +12,7 @@ import Link from "next/link"
                     <TitleFooter title='¿QUIÉNES SOMOS?' img={'/quienes-somos.png'} />
                     <span className="text-white text-xl">Acerca de</span>
                     <span className="text-white text-xl">Sala de Prensa</span>
-                    <Link href={'https://www.trabajopolis.bo/empresa-con-ofertas-de-trabajo-y-empleo-en-bolivia/362914/Markas-S.R.L.'} className="text-white text-xl">Trabaja con Nosotros</Link>
+                    <Link href={'https://www.trabajopolis.bo/empresa-con-ofertas-de-trabajo-y-empleo-en-bolivia/362914/Markas-S.R.L.'} target="_blank" className="text-white text-xl">Trabaja con Nosotros</Link>
                 </div>
                 <div className="flex flex-col">
                     <TitleFooter title='SERVICIO AL CLIENTE' img={'/servicio-cliente.png'}/>
@@ -23,13 +23,13 @@ import Link from "next/link"
                 <div className="flex flex-col">
                     <TitleFooter title='SUCURSALES' img={'/quienes-somos.png'}/>
                     <p className="uppercase text-white text-2xl font-bold">Santa Cruz</p>
-                    <Link href={'https://goo.gl/maps/V5vMLQre2vnL4x298'} className="text-white text-xl">HausCenter - Central Cañoto</Link>
-                    <Link href={'https://goo.gl/maps/QkkrR6LniQWxURhk9'} className="text-white text-xl">HausCenter - Isabela La Católica</Link>
-                    <Link href={'https://goo.gl/maps/t3uDvZsbULxcHb3f9'} className="text-white text-xl">HausCenter - Mega Center</Link>
-                    <Link href={'https://goo.gl/maps/Vt54zY5bczzdMpyp9'} className="text-white text-xl">HausCenter - Mall Las Brisas</Link>
-                    <Link href={'https://goo.gl/maps/MUVLtJFfRsQ9xfXc8'} className="text-white text-xl">HausCenter - Ventura</Link>
+                    <Link href={'https://goo.gl/maps/V5vMLQre2vnL4x298'} target="_blank" className="text-white text-xl">HausCenter - Central Cañoto</Link>
+                    <Link href={'https://goo.gl/maps/QkkrR6LniQWxURhk9'} target="_blank" className="text-white text-xl">HausCenter - Isabela La Católica</Link>
+                    <Link href={'https://goo.gl/maps/t3uDvZsbULxcHb3f9'} target="_blank" className="text-white text-xl">HausCenter - Mega Center</Link>
+                    <Link href={'https://goo.gl/maps/Vt54zY5bczzdMpyp9'} target="_blank" className="text-white text-xl">HausCenter - Mall Las Brisas</Link>
+                    <Link href={'https://goo.gl/maps/MUVLtJFfRsQ9xfXc8'} target="_blank" className="text-white text-xl">HausCenter - Ventura</Link>
                     <p className="uppercase text-white text-2xl font-bold mt-6">Cochabamba</p>
-                    <Link href={'https://goo.gl/maps/XKfsctoNGVm4E2z38'} className="text-white text-xl">HausCenter - Paseo Aranjuez</Link>
+                    <Link href={'https://goo.gl/maps/XKfsctoNGVm4E2z38'} target="_blank" className="text-white text-xl">HausCenter - Paseo Aranjuez</Link>
                 </div>
             </div>
             <div className="w-full">
