@@ -11,6 +11,9 @@ import { Button } from "../ui/button";
 import { Slider } from "../ui/slider";
 import Link from "next/link";
 import { validateOffer } from "@/lib/helpers";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../ui/card";
+import { Separator } from "../ui/separator";
+import TitleBorder from "../ui/titleBorder";
 export interface ISubcategory {
     data: DAT;
     meta: Meta;
@@ -129,38 +132,12 @@ const ListSubcategory = ({ slug: slug, idSubcategory }: ICategoria) => {
                 !loadingSubcategory ?
                     <>
                         <div className="m-6">
-                            <div className="mt-6 relative">
-                                <h2 className="absolute text-4xl font-extrabold text-primary tracking-tight bg-white pr-3">
-                                    {category.attributes.nombre}
-                                </h2>
-                                <div className="border-b-2 h-8 border-primary">
-
-                                </div>
-                            </div>
-                            <div className="mt-10">
-                                <ScrollArea>
-                                    <div className="flex space-x-4 pb-4">
-                                        {
-                                            category.attributes.subcategorias.data.length > 0 ? (
-                                                category.attributes.subcategorias.data.map((subcategory: any) => (
-                                                    <Link href={`/categoria/${category.attributes.slug}/${subcategory.id}`} key={subcategory.id} className="cursor-pointer flex-shrink-0 relative w-[220px] h-[190px] flex justify-center items-center">
-                                                        <div className="absolute w-full h-full bg-black bg-opacity-60 rounded-2xl"></div>
-                                                        <Img url={subcategory.attributes.imagen.data.attributes.url} alt={subcategory.attributes.nombre} qwidth={200} qheight={100} width={"70%"} height={"70%"} objectFit={"contain"}></Img>
-                                                        <p className="absolute text-white text-2xl font-bold text-center mt-[90px]">{subcategory.attributes.nombre}</p>
-                                                    </Link>
-                                                ))
-                                            ) : <></>
-                                        }
-                                    </div>
-                                    <ScrollBar orientation="horizontal" />
-                                </ScrollArea>
-                            </div>
+                            <TitleBorder title={category.attributes.nombre} />
                         </div>
-                        <ListProducts loadingBrand={loadingBrand} brands={brands} setBrand={setBrand} onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMin={priceMin} priceMax={priceMax} newFetchProducts={filterFetchProducts} loadingProduct={loadingProduct} products={products} onChangeOrderByPrice={onChangeOrderByPrice} />
+                        <ListProducts idSubcategory={idSubcategory} category={category} loadingBrand={loadingBrand} brands={brands} setBrand={setBrand} onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMin={priceMin} priceMax={priceMax} newFetchProducts={filterFetchProducts} loadingProduct={loadingProduct} products={products} onChangeOrderByPrice={onChangeOrderByPrice} />
                     </>
                     : <div className="h-[700px] flex justify-center items-center">
                         <span>Cargando...</span>
-                        {/* <Skeleton className="w-full h-[120px] bg-slate-500" /> */}
                     </div>
             }
         </>
@@ -170,11 +147,32 @@ const ListSubcategory = ({ slug: slug, idSubcategory }: ICategoria) => {
 interface ISubcategoria {
     subcategoria: any
 }
-export function Sidebar({ className, onChangeOrderByPrice, newFetchProducts, priceMax, priceMin, onChangePriceMax, onChangePriceMin, brands, setBrand, loadingBrand }: any) {
+export function Sidebar({ className, onChangeOrderByPrice, newFetchProducts, priceMax, priceMin, onChangePriceMax, onChangePriceMin, brands, setBrand, loadingBrand, category, idSubcategory }: any) {
     return (
         <div>
             <div className="space-y-4 py-4">
                 <div className="px-3 py-2">
+                    <div className="">
+                        <h2 className="m-2 px-4 text-2xl font-semibold tracking-tight text-primary">
+                            Subcategorias
+                        </h2>
+                        <div className="space-y-1 mx-8">
+                            <RadioGroup defaultValue={idSubcategory}>
+                            {
+                                category.attributes.subcategorias.data.length > 0 ? category.attributes.subcategorias.data.map((subcategory: any, index:any) =>
+                                    <>
+                                            <Link href={`/categoria/${category.attributes.slug}/${subcategory.id}`} key={subcategory.id} className="flex items-center space-x-2 cursor-pointer">
+                                                <RadioGroupItem className="cursor-pointer" value={`${subcategory.id}`} id={index} />
+                                                <Label className="cursor-pointer" htmlFor={index}>{subcategory.attributes.nombre}</Label>
+                                            </Link>
+                                    </>) : <></>
+                            }
+                            </RadioGroup>
+                        </div>
+                    </div>
+
+                    <Separator className="my-4" />
+
                     <h2 className="m-2 px-4 text-2xl font-semibold tracking-tight text-primary">
                         Ordenar por
                     </h2>
@@ -245,13 +243,13 @@ const SkeletonProduct = () => <div className="card">
     </div>
 </div>
 
-const ListProducts = ({ loadingProduct, products, onChangeOrderByPrice, newFetchProducts, priceMin, priceMax, onChangePriceMax, onChangePriceMin, brands, setBrand }: any) => {
+const ListProducts = ({ loadingProduct, products, onChangeOrderByPrice, newFetchProducts, priceMin, priceMax, onChangePriceMax, onChangePriceMin, brands, setBrand, category, idSubcategory }: any) => {
     return (
         <div className="">
             <div className="border-t">
                 <div className="bg-background">
                     <div className="grid lg:grid-cols-5">
-                        <Sidebar brands={brands} setBrand={setBrand} onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMax={priceMax} priceMin={priceMin} newFetchProducts={newFetchProducts} onChangeOrderByPrice={onChangeOrderByPrice} className="hidden lg:block" />
+                        <Sidebar idSubcategory={idSubcategory} category={category} brands={brands} setBrand={setBrand} onChangePriceMax={onChangePriceMax} onChangePriceMin={onChangePriceMin} priceMax={priceMax} priceMin={priceMin} newFetchProducts={newFetchProducts} onChangeOrderByPrice={onChangeOrderByPrice} className="hidden lg:block" />
                         <div className="col-span-3 lg:col-span-4 lg:border-l">
                             <div className="h-full px-4 py-6 lg:px-8">
                                 <div defaultValue="music" className="h-full space-y-6">
