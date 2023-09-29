@@ -4,11 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import TitleBorder from "@/components/ui/titleBorder";
-import { MapPin } from "lucide-react";
 import Link from "next/link";
 
 
 export default function CreditInfo() {
+
+   
     const creditInfo = [
         {
             name: 'DEPENDIENTES',
@@ -157,25 +158,25 @@ export default function CreditInfo() {
                         <CardDescription>(BURO INFORMACIÓN CREDITICIA)</CardDescription>
                     </CardHeader>
                     <CardContent className="text-primary font-semibold space-y-3">
-                        <p><span className="font-extrabold">PASO 1: </span>Descargue el documento de Aurotización de Buro de Información Crediticia.</p>
-                        <p><Button>DESCARGAR DOCUMENTO 📃</Button></p>
-                        <p><span className="font-extrabold">PASO 2: </span>Imprime el documento en una hoja limpia y de color blanco.</p>
-                        <p><span className="font-extrabold">PASO 3: </span>Coloca los siguientes datos en el orden correspondiente:</p>
-                        <p>
+                        <div><span className="font-extrabold">PASO 1: </span>Descargue el documento de Aurotización de Buro de Información Crediticia.</div>
+                        <div><a className="" href="/pdf/autorizacion_de_información_crediticia.pdf" download target="_blank"><Button>DESCARGAR DOCUMENTO 📃</Button></a></div>
+                        <div><span className="font-extrabold">PASO 2: </span>Imprime el documento en una hoja limpia y de color blanco.</div>
+                        <div><span className="font-extrabold">PASO 3: </span>Coloca los siguientes datos en el orden correspondiente:</div>
+                        <div>
                             <ul className="list-disc ml-20">
                                 <li>Firma.</li>
                                 <li>Nombre completo.</li>
                                 <li>Numero de cedula de identidad.</li>
                             </ul>
-                        </p>
-                        <p><span className="font-extrabold">PASO 4: </span>Escanea o Toma una Foto de los Siguientes Datos en el orden Correspondiente:</p>
-                        <p>
+                        </div>
+                        <div><span className="font-extrabold">PASO 4: </span>Escanea o Toma una Foto de los Siguientes Datos en el orden Correspondiente:</div>
+                        <div>
                             <ul className="list-disc ml-20">
                                 <li>Autorizacion del Buro.</li>
                                 <li>Cedula de identidad (anverso y reverso).</li>
                             </ul>
-                        </p>
-                        <p><Button>CARGAR DOCUMENTO 📃</Button></p>
+                        </div>
+                        <div><Button>CARGAR DOCUMENTO 📃</Button></div>
                     </CardContent>
                 </Card>
             </div>
