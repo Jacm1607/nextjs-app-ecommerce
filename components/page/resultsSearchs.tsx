@@ -34,7 +34,7 @@ const ResultSearchs = ({ query }: IResultSearchs) => {
                     {response.map((product: any) =>
                         <div key={product.id} className="grid grid-cols-6 mt-5">
 
-                            <Link key={product} href={`/producto/${product.slug }`} className="grid grid-cols-5 lg:col-span-4 col-span-6">
+                            <Link key={product} href={`/producto/${product.attributes.slug}`} className="grid grid-cols-5 lg:col-span-4 col-span-6">
                                 <div className="md:col-span-2 col-span-5 w-[195px] h-[195px] border-solid border-2 border-sky-900 flex justify-center items-center rounded-3xl">
                                     <Img url={product.attributes.imagen.data[0].attributes.url} width={"140px"} height={"140px"} objectFit={"cover"} />
                                 </div>
