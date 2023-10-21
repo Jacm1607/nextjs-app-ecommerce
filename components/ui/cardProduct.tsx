@@ -9,7 +9,7 @@ const CardProduct = ({ product }: any) => {
             validateOffer(product.attributes.precio, product.attributes.precio_oferta, product.attributes.inicio_oferta, product.attributes.limite_oferta) ? <div className="absolute"><Img className=" rounded-tl-[49px]" baseUrl={false} url={'/oferta.png'} width={"80%"} height={"80%"} objectFit={"cover"} /></div> : <></>
         }
         <div className="flex justify-center items-center p-6">
-            <Img url={product.attributes.imagen.data[0].attributes.url} width={"85%"} height={"85%"} objectFit={"contain"} />
+            <Img url={product.attributes.imagen.data[0].attributes.url} width={"160px"} height={"160px"} objectFit={"contain"} />
         </div>
         <div className="mt-auto mb-6">
             <p className="text-primary font-light text-center">{lenghtText(product.attributes.nombre, 60)}</p>

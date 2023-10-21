@@ -96,7 +96,7 @@ const DetailsProduct = async ({ slug }: any) => {
 
             <div className="col-span-6">
                 <TitleBorder title="PRODUCTOS RELACIONADOS" />
-                <div className="columns-4">
+                <div className="grid grid-cols-4">
                     <CardsProducts subcategory={_product.data[0].attributes.subcategoria.data.id} idProduct={_product.data[0].id} />
                 </div>
             </div>
@@ -118,7 +118,9 @@ const CardsProducts = async ({ subcategory, idProduct }: any) => {
     return (
         <>
             {
-                productsSimilar.data.map((product: any) => <CardProduct key={product.id} product={product} />)
+                productsSimilar.data.map((product: any) => <div key={product.id} className=" col-span-1">
+                    <CardProduct product={product} />
+                </div>)
             }
         </>
     )
