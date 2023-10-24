@@ -84,7 +84,8 @@ export default function Address() {
             Viernes: 10:00 a 22:00 Hrs.<br>
             Sábado: 10:00 a 22:00 Hrs.<br>
             Domingo: 11:00 a 21:00 Hrs.<br>`,
-            googleMaps: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7615.652697768703!2d-66.154668!3d-17.372087!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e375e26db2bc87%3A0x3abcb132682a80cc!2sHauscenter%20paseo%20aranjuez!5e0!3m2!1ses-419!2sbo!4v1698119522908!5m2!1ses-419!2sbo'
+            googleMaps: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7615.652697768703!2d-66.154668!3d-17.372087!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e375e26db2bc87%3A0x3abcb132682a80cc!2sHauscenter%20paseo%20aranjuez!5e0!3m2!1ses-419!2sbo!4v1698119522908!5m2!1ses-419!2sbo',
+            url: 'https://maps.app.goo.gl/pU2TXGTDXU9iuiCh9'
         }
     ]
     return (
