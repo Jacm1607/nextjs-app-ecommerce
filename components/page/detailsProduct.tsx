@@ -63,7 +63,6 @@ const DetailsProduct = async ({ slug }: any) => {
 
                         <p className="my-2 tracking-[2px] text-center text-xl"><span className="text-primary font-bold">ENVIÓ A DOMICILIO </span><span className="text-primary font-extrabold">DISPONIBLE.</span></p>
                         <p className="border-2 border-solid border-primary"></p>
-                        <p>{_product.data[0].attributes.descripcion_corta}</p>
                         <div className="flex space-x-2 mt-4">
                             <StockProduct product={{
                                 id: _product.data[0].id,
