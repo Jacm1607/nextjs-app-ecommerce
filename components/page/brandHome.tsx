@@ -1,115 +1,66 @@
 "use client"
 import styled, { keyframes, css } from "styled-components";
 import TitleBorder from "../ui/titleBorder";
+import { useEffect, useState } from "react";
+import Img from "../ui/img";
 
 const row1 = [
-    "/brands/marca1.png",
-    "/brands/marca2.png",
-    "/brands/marca3.png",
-    "/brands/marca4.png",
-    "/brands/marca5.png",
-    "/brands/marca6.png",
-    "/brands/marca7.png",
-    "/brands/marca8.png",
-    "/brands/marca9.png",
-    "/brands/marca10.png",
+  "/brands/marca1.png",
+  "/brands/marca2.png",
+  "/brands/marca3.png",
+  "/brands/marca4.png",
+  "/brands/marca5.png",
 ];
 
-const AppContainer = styled.div`
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+const row2 = [
+  "/brands/marca6.png",
+  "/brands/marca7.png",
+  "/brands/marca8.png",
+  "/brands/marca9.png",
+  "/brands/marca10.png",
+];
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
 
-const Marquee = styled.div`
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-  user-select: none;
-
-  mask-image: linear-gradient(
-    to right,
-    hsl(0 0% 0% / 0),
-    hsl(0 0% 0% / 1) 10%,
-    hsl(0 0% 0% / 1) 90%,
-    hsl(0 0% 0% / 0)
-  );
-`;
-
-const scrollX = keyframes`
-  from {
-    left: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-`;
-
-const common = css`
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  white-space: nowrap;
-  width: 100%;
-  animation: ${scrollX} 30s linear infinite;
-`;
-
-const MarqueeGroup = styled.div`
-  ${common}
-`;
-
-const ImageGroup = styled.div`
-  display: grid;
-  place-items: center;
-  width: 100%;
-//   padding: calc(clamp(10rem, 1rem + 30vmin, 30rem) / 10);
-`;
-
-const Imagen = styled.img`
-  object-fit: contain;
-  height: 100%;
-  aspect-ratio: 16/9;
-  padding: 5px 20px;
-`;
 
 const BranHome = () => {
-    return (
-        <div className="my-6">
-            <TitleBorder title={"mARCAS RECONOCIDAS"} />
-            <AppContainer>
-                <Wrapper>
-                    <Marquee>
-                        <MarqueeGroup>
-                            {row1.map((el, index) => (
-                                <ImageGroup key={index}>
-                                    <Imagen className="w-[260px]" src={el} />
-                                </ImageGroup>
-                            ))}
-                        </MarqueeGroup>
-                        <MarqueeGroup>
-                            {row1.map((el, index) => (
-                                <ImageGroup key={index}>
-                                    <Imagen src={el} />
-                                </ImageGroup>
-                            ))}
-                        </MarqueeGroup>
-                    </Marquee>
-                </Wrapper>
-            </AppContainer>
-        </div >
-    )
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setInterval(() => {
+      setShow((prevShow) => {
+        return !prevShow; // Cambia al valor opuesto
+      });
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+  return (
+    <div className="my-6">
+      <TitleBorder title={"mARCAS RECONOCIDAS"} />
+      <div className="grid grid-cols-1">
+        <div className={`col-span-1 ${show ? 'hidden' : 'block'}`}>
+          <div className="grid grid-cols-5 gap-4">
+            {
+              row1.map((img) => <div className="col-span-1">
+                <Img baseUrl={false} url={img} width={"200px"} height={"200px"} objectFit={"contain"} />
+              </div>)
+            }
+          </div>
+        </div>
+        <div className={`col-span-1 ${show ? 'block' : 'hidden'}`}>
+          <div className="grid grid-cols-5 gap-4">
+            {
+              row2.map((img) => <div className="col-span-1">
+                <Img baseUrl={false} url={img} width={"200px"} height={"200px"} objectFit={"contain"} />
+              </div>)
+            }
+          </div>
+        </div>
+      </div>
+    </div >
+  )
 }
 
 export default BranHome;
