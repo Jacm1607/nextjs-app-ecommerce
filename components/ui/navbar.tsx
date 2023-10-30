@@ -6,6 +6,7 @@ import { ItemsNavbar } from './itemsNavbar';
 import { ShoppingCart } from 'lucide-react';
 import LogIn from './user-login';
 import { Separator } from './separator';
+import FavoriteNavbar from './favorite';
 
 const Navbar = () => {
     return (
@@ -24,7 +25,7 @@ const Navbar = () => {
                 <div className="col-span-2 flex justify-end items-center text-white space-x-6 px-4">
                     <Link href={'/carrito-compra'} className='text-center'> <ShoppingCart size={38} color="#fff" /></Link>
                     <Separator orientation="vertical" className='h-1/2' />
-                    {/* <Link href={'/'} className='px-4 py-2 bg-black'>Favorito</Link> */}
+                    <FavoriteNavbar />
                     <LogIn />
                 </div>
 
