@@ -10,6 +10,7 @@ import { validateOffer } from "@/lib/helpers";
 import Favorite from "@/app/producto/[slug]/favorite";
 import TitleBorder from "../ui/titleBorder";
 import CardProduct from "../ui/cardProduct";
+import Link from "next/link";
 
 
 const fetchProduct = (slug: any) => {
@@ -22,6 +23,7 @@ const fetchProduct = (slug: any) => {
 
 const DetailsProduct = async ({ slug }: any) => {
     const _product = await fetchProduct(slug);
+    console.log(_product.data[0].attributes)
     return (
         <div id="detailsProduct" className="grid grid-cols-6 gap-6 px-24 py-8">
             <div className="col-span-4">
@@ -55,11 +57,16 @@ const DetailsProduct = async ({ slug }: any) => {
                                     <p className="text-[46px] font-extrabold"><span className="text-[25px]">BS.</span>{_product.data[0].attributes.precio}</p>
                                 </>
                         }
-                        <div className="flex flex-col w-2/3 border-[1px] border-primary rounded-[45px] p-4">
-                            <p className="text-[26px] h-[24px] font-extrabold"><span>11 Cuotas</span></p>
-                            <p className="text-[36px] h-[34px] font-extrabold"><span className="text-[25px]">BS.</span>00000.00</p>
-                            <p className="text-center mt-3"><span className=" underline font-extrabold">Solicita tu Crédito</span></p>
-                        </div>
+                        {
+                            _product.data[0].attributes.precio_cuota > 0 ? 
+                                <div className="flex flex-col w-2/3 border-[1px] border-primary rounded-[45px] p-4">
+                                    <p className="text-[26px] h-[24px] font-extrabold"><span>11 Cuotas</span></p>
+                                    <p className="text-[36px] h-[34px] font-extrabold"><span className="text-[25px]">BS.</span>{_product.data[0].attributes.precio_cuota}</p>
+                                    <p className="text-center mt-3"><Link href='/credi-haus'><span className=" underline font-extrabold">Solicita tu Crédito</span></Link></p>
+                                </div>
+                            : <></>
+                        }
+
 
                         <p className="my-2 tracking-[2px] text-center text-xl"><span className="text-primary font-bold">ENVIÓ A DOMICILIO </span><span className="text-primary font-extrabold">DISPONIBLE.</span></p>
                         <p className="border-2 border-solid border-primary"></p>
@@ -103,7 +110,7 @@ const DetailsProduct = async ({ slug }: any) => {
     )
 }
 
-const fetchSimilarProduct = async (subcategory: string, idProduct:any) => {
+const fetchSimilarProduct = async (subcategory: string, idProduct: any) => {
     const responseProductSimilar = await fetch(`${URL_BASE}/api/productos?populate[imagen]=*&filters[subcategoria][id][$eq]=${subcategory}&filters[id][$ne]=${idProduct}&pagination[limit]=4`, {
         cache: 'no-store'
     })
