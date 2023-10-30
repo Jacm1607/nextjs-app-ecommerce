@@ -43,7 +43,7 @@ const BranHome = () => {
         <div className={`col-span-1 ${show ? 'hidden' : 'block'}`}>
           <div className="grid grid-cols-5 gap-4">
             {
-              row1.map((img) => <div className="col-span-1">
+              row1.map((img, index) => <div key={index} className="col-span-1">
                 <Img baseUrl={false} url={img} width={"200px"} height={"200px"} objectFit={"contain"} />
               </div>)
             }
@@ -52,7 +52,7 @@ const BranHome = () => {
         <div className={`col-span-1 ${show ? 'block' : 'hidden'}`}>
           <div className="grid grid-cols-5 gap-4">
             {
-              row2.map((img) => <div className="col-span-1">
+              row2.map((img, index) => <div key={index} className="col-span-1">
                 <Img baseUrl={false} url={img} width={"200px"} height={"200px"} objectFit={"contain"} />
               </div>)
             }
