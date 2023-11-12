@@ -1,7 +1,6 @@
 'use client'
 import { URL_BASE } from "@/lib/endpoint";
 import Img from "../ui/img";
-import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { Skeleton } from "../ui/skeleton";
@@ -11,9 +10,10 @@ import { Button } from "../ui/button";
 import { Slider } from "../ui/slider";
 import Link from "next/link";
 import { validateOffer } from "@/lib/helpers";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../ui/card";
 import { Separator } from "../ui/separator";
 import TitleBorder from "../ui/titleBorder";
+import dynamic from "next/dynamic";
+
 export interface ISubcategory {
     data: DAT;
     meta: Meta;
@@ -294,4 +294,4 @@ const ListProducts = ({ loadingProduct, products, onChangeOrderByPrice, newFetch
 
 
 
-export default ListSubcategory;
+export default dynamic (() => Promise.resolve(ListSubcategory), {ssr: false})
