@@ -48,7 +48,7 @@ const CategoryHome = async () => {
                     {
                         categories.data.map((category: ICategory) =>
                             <Link key={category.id} href={`/categoria/${category.attributes.slug}/${category.attributes.subcategorias.data[0].id}`}>
-                                <div className="card w-[160px] h-[130px] flex flex-col justify-center items-center">
+                                <div className="relative card w-[160px] h-[130px] flex flex-col justify-center items-center">
                                     <div className="absolute w-full h-full rounded-2xl"></div>
                                     <Img url={category.attributes.imagen.data.attributes.url} alt={category.attributes.nombre} qwidth={200} qheight={100} width={"70%"} height={"70%"} objectFit={"contain"}></Img>
                                     <p className="absolute text-primary text-sm font-bold text-center mt-[120px]">{category.attributes.nombre}</p>
